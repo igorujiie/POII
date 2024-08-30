@@ -7,9 +7,13 @@ public abstract class ItemCatalogo {
     private String titulo;
     private String autor;
     private LocalDate data;
+    private SituacaoLivro situacao;
+
+
 
     public ItemCatalogo(String titulo) {
         this.titulo = titulo;
+        this.situacao = SituacaoLivro.DISPONIVEL;
     }
 
     public LocalDate getData() {
@@ -41,14 +45,27 @@ public abstract class ItemCatalogo {
         return titulo;
     }
 
+    public SituacaoLivro getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(SituacaoLivro situacao) {
+        this.situacao = situacao;
+    }
+
+
+
     @Override
     public boolean equals(Object obj) {
-        if (obj != null && !(obj instanceof ItemCatalogo)) return false;
-        ItemCatalogo item = (ItemCatalogo) obj;
-
-        if (this.titulo != null && this.titulo.equalsIgnoreCase(item.getTitulo()))
-            return true;
-
-        return false;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ItemCatalogo that = (ItemCatalogo) obj;
+        return titulo.equals(that.titulo);
     }
+
+    @Override
+    public int hashCode() {
+        return titulo.hashCode();
+    }
+
 }

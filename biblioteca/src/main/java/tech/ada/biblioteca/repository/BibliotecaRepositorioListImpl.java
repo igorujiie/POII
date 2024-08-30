@@ -2,6 +2,7 @@ package tech.ada.biblioteca.repository;
 
 
 import tech.ada.biblioteca.model.ItemCatalogo;
+import tech.ada.biblioteca.model.SituacaoLivro;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,29 +44,37 @@ public class BibliotecaRepositorioListImpl implements BibliotecaRepositorio {
 
     }
 
+
     @Override
     public void emprestar(ItemCatalogo item) {
-        if (itens.isEmpty() || this.itens == null)
+        if (itens.isEmpty() || this.itens == null) {
             System.out.println("Nenhum item cadastrado");
-        else {
+        } else {
             for (ItemCatalogo catalogoItem : this.itens) {
-                if (catalogoItem.equals(item))
-                    System.out.println("Item emprestado: " + item);
+                if (catalogoItem.equals(item)) {
+                    if (catalogoItem.getSituacao() == SituacaoLivro.DISPONIVEL) {
+                        catalogoItem.setSituacao(SituacaoLivro.EMPRESTADO);
+                        System.out.println("Item emprestado: " + item);
+                    } else {
+                        System.out.println("O livro não está disponível");
+                    }
+                }
             }
         }
     }
 
     @Override
     public void devolver(ItemCatalogo item) {
-        if (itens.isEmpty() || this.itens == null)
+        if (itens.isEmpty() || this.itens == null) {
             System.out.println("Nenhum item cadastrado");
-        else {
+        } else {
             for (ItemCatalogo catalogoItem : this.itens) {
-                if (catalogoItem.equals(item))
+                if (catalogoItem.equals(item)) {
+                    catalogoItem.setSituacao(SituacaoLivro.DISPONIVEL);
                     System.out.println("Item devolvido: " + item);
+                }
             }
         }
-
     }
 
 

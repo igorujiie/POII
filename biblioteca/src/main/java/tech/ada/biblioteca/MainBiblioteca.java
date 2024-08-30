@@ -35,6 +35,8 @@ public class MainBiblioteca {
         System.out.println("emprestando na biblioteca fisica");
         bibServiceFisica.emprestar( livroabc );
 
+        bibServiceFisica.emprestar( livroabc );
+
         System.out.println("devolvendo na biblioteca fisica");
         bibServiceFisica.devolver(livroabc);
 
